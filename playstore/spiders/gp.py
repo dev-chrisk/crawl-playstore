@@ -20,11 +20,11 @@ class Game (Spider):
 
         "https://play.google.com/store/apps/category/GAME_FAMILY/collection/topselling_paid",
         "https://play.google.com/store/apps/category/GAME_FAMILY/collection/topselling_free",
-        "https://play.google.com/store/apps/category/GAME_ARCADE/collection/topgrossing",
+        "https://play.google.com/store/apps/category/GAME_FAMILY/collection/topgrossing",
 
         "https://play.google.com/store/apps/category/GAME_EDUCATIONAL/collection/topselling_paid",
         "https://play.google.com/store/apps/category/GAME_EDUCATIONAL/collection/topselling_free",
-        "https://play.google.com/store/apps/category/GAME_ARCADE/collection/topgrossing",
+        "https://play.google.com/store/apps/category/GAME_EDUCATIONAL/collection/topgrossing",
 
         "https://play.google.com/store/apps/category/GAME_WORD/collection/topselling_paid",
         "https://play.google.com/store/apps/category/GAME_WORD/collection/topselling_free",
@@ -89,20 +89,12 @@ class Game (Spider):
 
     def parse(self, response):
         links = Selector(response).xpath('//h2/a[@class="title"]/@href').extract()
-        # self.log("Games Count : %s" % len(games))
 
         for link in links:
             item = PlayStoreItem()
             link = 'https://play.google.com' + link
             item['link'] = link
             yield Request(url=link, meta={'item': item}, callback=self.parse_game)
-
-        # for game in games:
-        #     item = PlayStoreItem()
-        #     item['title'] = game.xpath('//h2/a[@class="title"]/@title').extract()[0]
-        #     link = 'https://play.google.com' + game.xpath('//h2/a[@class="title"]/@href').extract()[0]
-        #     item['link'] = link
-        #     yield Request(url=link, meta={'item': item}, callback=self.parse_game)
 
     def parse_game(self, response):
         game = Selector(response).xpath('//div[@class="main-content"]')
