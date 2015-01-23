@@ -1,4 +1,5 @@
 # crawl-playstore
+
 Crawling PlayStore Games information with Scrapy to MongDB(local)
 
 ## Installation
@@ -9,8 +10,8 @@ MongoDB : (http://api.mongodb.org/python/current/installation.html)
 
 ## Usage
 
-``` mongod or mongod --dbpath MONGO_DB_PATH
-scrapy crawl game ```
+``` mongod ``` or ``` mongod --dbpath MONGO_DB_PATH ```
+``` scrapy crawl game ```
 
 ## License
 
